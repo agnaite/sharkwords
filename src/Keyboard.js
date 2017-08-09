@@ -11,7 +11,7 @@ class Keyboard extends Component {
   selectLetter(evt) {
     // disable letter that was guessed
     evt.target.disabled = true;
-    this.props.onLetterSelect();
+    this.props.onLetterSelect(evt.target.innerText);
 
     // if more than 5 guesses have been made, disable all the buttons
     if (this.props.guesses > 3) {

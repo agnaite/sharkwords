@@ -17,6 +17,17 @@ class SecretWord extends Component {
     this.setState({ secretWord: wordObj });
   }
 
+  componentWillReceiveProps() {
+    let updatedSecretWord = this.state.secretWord;
+    for (let j=0; j < Object.keys(updatedSecretWord).length; j++) {
+      if (updatedSecretWord[j][0] === this.props.letters) {
+        updatedSecretWord[j][1] = true;
+      }
+    this.setState({ secretWord: updatedSecretWord },
+                    () => { console.log('did it'); });
+    }
+  }
+
   render() {
     const secretWord = Object.keys(this.state.secretWord).map((key, i) =>
       (this.state.secretWord[key][1] === true) ? (
@@ -29,7 +40,6 @@ class SecretWord extends Component {
         </div>
       )
     );
-    console.log(secretWord);
     return (
       <div className='col-sm-4 col-sm-offset-4 row'>
         { secretWord }
