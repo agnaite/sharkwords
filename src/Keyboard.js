@@ -2,23 +2,37 @@ import React, { Component } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 class Keyboard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.selectLetter = this.selectLetter.bind(this);
+  }
+
   selectLetter(evt) {
-    console.log(evt.target.innerText);
+    // disable letter that was guessed
     evt.target.disabled = true;
-    console.log(evt.target.disabled);
+    this.props.onLetterSelect();
+
+    // if more than 5 guesses have been made, disable all the buttons
+    if (this.props.guesses > 3) {
+      const btns = document.getElementsByClassName('btn');
+      for (let i=0; i<btns.length; i++) {
+        btns[i].setAttribute('disabled', true);
+      }
+    }
   }
 
   render() {
     const letters = 'abcdefghijklmnopqrstuvw';
-    const letterBtns = letters.split('').map((letter) =>
-      <button className='btn btn-default' onClick={this.selectLetter}>
+    const letterBtns = letters.split('').map((letter, i) =>
+      <button key={i} className='btn btn-default col-sm-2' onClick={this.selectLetter}>
         { letter }
       </button>
     );
     return (
-      <div className='container'>
-        { letterBtns }
-      </div>
+        <div className='col-sm-4 col-sm-offset-4 row'>
+          { letterBtns }
+        </div>
     );
   }
 }
