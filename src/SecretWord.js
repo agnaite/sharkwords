@@ -20,13 +20,20 @@ class SecretWord extends Component {
   componentWillReceiveProps() {
     let updatedSecretWord = this.state.secretWord;
     for (let j=0; j < Object.keys(updatedSecretWord).length; j++) {
-      if (updatedSecretWord[j][0] === this.props.letters) {
+      console.log('hello?');
+      console.log(this.props.letter);
+      if (updatedSecretWord[j][0] === this.props.letter) {
+        console.log(updatedSecretWord[j][0]);
         updatedSecretWord[j][1] = true;
       }
-    this.setState({ secretWord: updatedSecretWord },
-                    () => { console.log('did it'); });
+    this.setState({ secretWord: updatedSecretWord });
     }
+    console.log(this.state);
   }
+
+  // componentWillUpdate() {
+  //   console.log("in willUpdate", this.state);
+  // }
 
   render() {
     const secretWord = Object.keys(this.state.secretWord).map((key, i) =>

@@ -18,8 +18,8 @@ class Game extends Component {
     super(props);
     this.state = { guess: guess0,
                    numGuesses: 0,
-                   secretWord: 'banana',
-                   correctLettersGuessed: '' }
+                   secretWord: 'moon',
+                   correctLetterGuessed: '' }
 
     this.changeImage = this.changeImage.bind(this);
     this.increaseNumGuess = this.increaseNumGuess.bind(this);
@@ -30,9 +30,10 @@ class Game extends Component {
       this.setState({ numGuesses: this.state.numGuesses + 1 },
                       () => {this.changeImage() });
     } else {
-      this.setState({ correctLettersGuessed: ltr },
+      this.setState({ correctLetterGuessed: ltr },
                       () => {console.log('correct letter guess'); });
     }
+    console.log(this.state);
   }
 
   changeImage() {
@@ -58,7 +59,7 @@ class Game extends Component {
         <div className='container'>
           <div className='row'>
             <SecretWord word={ this.state.secretWord }
-                        letters={ this.state.correctLettersGuessed } />
+                        letter={ this.state.correctLetterGuessed } />
           </div>
         </div>
         <div className='row'>
